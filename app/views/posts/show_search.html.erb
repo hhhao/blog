@@ -1,0 +1,7 @@
+<h1><% if @posts.count == 0 %>There Are No <% end %>Posts That Contain: '<%= @query %>'</h1>
+
+<% @posts.each do |p| %>
+    <p>
+        <%= link_to p.title, post_path(p) %>
+    </p>
+<% end %>

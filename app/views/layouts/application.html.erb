@@ -9,8 +9,16 @@
   </head>
 
   <body>
-      <%= link_to 'Home', home_path %>
-      <%= link_to 'About', about_path %>
+      <div>
+          <%= link_to 'Home', home_path %>
+          <%= link_to 'About', about_path %>
+          <%= link_to 'Posts', posts_path %>
+          <%= link_to 'New', new_post_path %>
+          <%= form_tag search_post_path do%>
+              <%= text_field_tag :search %>
+              <%= submit_tag 'Search Posts'%>
+          <% end %>
+      </div>
     <%= yield %>
   </body>
 </html>
