@@ -1,0 +1,13 @@
+<h1>Enter Your New Password</h1>
+
+<%= form_for @user do |f| %>
+    <div>
+        <%= f.label :new_password %>
+        <%= f.text_field :password %>
+    </div>
+    <div>
+        <%= f.label :confirm_password %>
+        <%= f.text_field :password_confirmation %>
+    </div>
+    <%= f.submit 'Change Password' %>
+<% end %>

@@ -1,29 +1,8 @@
-<h1>All Posts</h1>
+<h1><%= params[:show_favs] ? 'Favourite' : 'All' %> Posts <%= @query.nil? ? '' : "matching '#{@query}'" %></h1>
 
 <% @posts.each do |p| %>
     <p>
         <%= link_to p.title, post_path(p) %>
     </p>
 <% end %>
-
-<% if @max_page > 1 %>
-    <% if @page > 1 %>
-        <%= link_to '|<.. ', page_path({page: 1}) %>
-        <%= link_to '< ', page_path({page: @page - 1}) %>
-    <% end %>
-
-    <% for i in (@page-3)..(@page+3) %>
-        <% if i > 0 && i <= @max_page %>
-            <% if i == @page %>
-                <%= link_to " [#{@page}] ", page_path({page: @page}) %>
-            <% else %>
-                <%= link_to " #{i} ", page_path({page: i}) %>
-            <% end %>
-        <% end %>
-    <% end %>
-
-    <% if @page < @max_page %>
-        <%= link_to ' >', page_path({page: @page + 1}) %>
-        <%= link_to ' ..>|', page_path({page: @max_page}) %>
-    <% end %>
-<% end %>
+<%= paginate @posts %>

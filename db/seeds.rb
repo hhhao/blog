@@ -5,9 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-2000.times do
-  Post.create({ title: Faker::Company.catch_phrase,
-                    body: Faker::Hacker.say_something_smart,
-                  })
+100.times do
+  User.create({first_name: Faker::Name.first_name,
+               last_name: Faker::Name.last_name,
+               email: "#{rand(10000)}#{Faker::Internet.email}",
+               password: 'asdf'})
 end
+
+10.times do
+  Category.create({title: Faker::Hacker.adjective})
+end
+
+200.times do
+  Post.create({ title: Faker::Company.catch_phrase,
+                body: Faker::Hacker.say_something_smart,
+                category_id: rand(28..34),
+                user_id: rand(1..User.count)
+              })
+end
+

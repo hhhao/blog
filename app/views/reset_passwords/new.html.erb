@@ -1,0 +1,15 @@
+<h1>Reset Your Password</h1>
+
+<%= form_tag reset_passwords_path do %>
+    <div>
+        <%= label_tag :email %>
+        <%= text_field_tag :email %>
+    </div>
+    <%= submit_tag 'Reset' %>
+    <p>
+        You will receive an email with the reset link.
+    </p>
+<% end %>
+<% unless @user.nil? %>
+    <%= link_to 'Click here to reset password', edit_reset_password_path(@token)%>
+<% end %>
