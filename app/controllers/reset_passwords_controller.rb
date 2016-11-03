@@ -16,14 +16,20 @@ class ResetPasswordsController < ApplicationController
 
   def edit
     @user = User.find_by(reset_password_digest: params[:id])
-    if @user.reset_sent_at >= DateTime.now - 1.day
-      redirect_to new_session_path, notice: 'Password reset, please sign in'
-    else
-      redirect_to new_session_path, alert: 'Reset expired'
-    end
   end
 
   def update
-    
+    @user = User.find params[:id]
+    if @user.reset_sent_at >= DateTime.now - 1.day
+      if @user.update params.permit(:password, :password_confirmation)
+        user.failed_attempts_count = 0
+        redirect_to new_session_path, notice: 'Password reset, please sign in'
+      else
+        flash.now[:alert] = 'Passwords do not match'
+        render :edit
+      end
+    else
+      redirect_to new_session_path, alert: 'Reset expired'
+    end
   end
 end

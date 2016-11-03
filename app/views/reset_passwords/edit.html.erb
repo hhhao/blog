@@ -1,13 +1,13 @@
 <h1>Enter Your New Password</h1>
 
-<%= form_for @user do |f| %>
+<%= form_tag reset_password_path(@user), method: :patch do %>
     <div>
-        <%= f.label :new_password %>
-        <%= f.text_field :password %>
+        <%= label_tag :new_password %>
+        <%= password_field_tag :password %>
     </div>
     <div>
-        <%= f.label :confirm_password %>
-        <%= f.text_field :password_confirmation %>
+        <%= label_tag :confirm_password %>
+        <%= password_field_tag :password_confirmation %>
     </div>
-    <%= f.submit 'Change Password' %>
+    <%= submit_tag 'Change Password' %>
 <% end %>
