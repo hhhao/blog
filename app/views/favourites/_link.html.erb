@@ -1,0 +1,5 @@
+<% if fav = @post.favourites.find_by(user_id: current_user.id) %>
+    <%= link_to 'un-favourite', favourite_path(fav), remote: true, method: :delete %>
+<% else %>
+    <%= link_to 'favourite', post_favourites_path(@post), remote: true, method: :post %>
+<% end %>

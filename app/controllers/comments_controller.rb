@@ -9,10 +9,14 @@ class CommentsController < ApplicationController
     @comment = Comment.new comment_params
     @comment.post = @post
     @comment.user = current_user
-    if @comment.save
-      redirect_to post_path(@post)
-    else
-      render 'posts/show'
+    respond_to do |format|
+      if @comment.save
+        format.js {render :create_success}
+        format.html {redirect_to post_path(@post)}
+      else
+        format.js {render :create_failure}
+        format.html {render 'posts/show'}
+      end
     end
   end
 
