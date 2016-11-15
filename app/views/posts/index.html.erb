@@ -1,0 +1,8 @@
+<h1><%= params[:show_favs] ? 'Favourite' : 'All' %> Posts <%= @query.nil? ? '' : "matching '#{@query}'" %></h1>
+
+<% @posts.each do |p| %>
+    <p>
+        <%= link_to p.title, post_path(p) %>
+    </p>
+<% end %>
+<%= paginate @posts %>

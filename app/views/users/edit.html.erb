@@ -1,0 +1,34 @@
+<h1>Edit User Info</h1>
+<%= @user.errors.full_messages.join(', ') %>
+<%= form_for @user do |f| %>
+    <% if params[:reset_pass].nil? %>
+        <div>
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name %>
+        </div>
+        <div>
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name %>
+        </div>
+        <div>
+            <%= f.label :email %>
+            <%= f.email_field :email %>
+        </div>
+        <hr/>
+    <% end %>
+    <div>
+        <%= f.label :current_password %>
+        <%= f.password_field :current_password, value: params[:reset_pass] %>
+    </div>
+    <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </div>
+    <div>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit %>
+<% end %>
+
+
